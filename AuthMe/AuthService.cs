@@ -38,7 +38,7 @@ namespace AuthMe
             {
                 Thread.Sleep(2000);
                 var authToken = DecodeToken(encodedToken);
-                authToken.Expires.AddSeconds(10);
+                authToken.Expires = DateTime.Now.AddSeconds(10);
 
                 return Newtonsoft.Json.JsonConvert.SerializeObject(authToken).Base64Encode();
             }

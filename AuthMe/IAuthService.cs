@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AuthMe
 {
-    interface IAuthService
+    public interface IAuthService
     {
         /// <summary>
         /// Returns an authentication token with an validity of 10 seconds

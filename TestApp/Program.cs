@@ -10,23 +10,19 @@ namespace TestApp
 {
     class Program
     {
+        static IAuthService authService = new AuthService();
         static async Task Main(string[] args)
         {
-            var authService = new AuthService();
             //Uppgift 1 hämta ett klipp
             string token = await authService.Authenticate("bob", "bob");
             Console.WriteLine($"Your token is: {token}");
             //Uppgift 2 spela upp ett klipp i en webbrowser som startas av programmet
             PlayClip(token);
             //Uppgift 3 vänta på att det förra klippet spelats färdigt
-            WaitForClip();
-
-            //Uppgift 4 hämta ett nytt klipp
-            PlayClip(token);
 
         }
 
-        private static void WaitForClip()
+        private static void WaitForClip(string token)
         {
             var done = "N";
             do
@@ -35,6 +31,7 @@ namespace TestApp
                 done = Console.ReadLine();
                 if (done == "Y")
                 {
+                    PlayClip(token);
                     break;
                 }
 
@@ -44,10 +41,19 @@ namespace TestApp
 
         private static async void PlayClip(string token)
         {
-            ProcessStartInfo psi = new ProcessStartInfo("chrome.exe");
-            Console.WriteLine("Your funny clip is: ");
-            psi.Arguments = await ClipService.FunnyClipService.GetClip(token);
-            Process.Start(psi);
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo("chrome.exe");
+                Console.WriteLine("Your funny clip is: ");
+                psi.Arguments = await ClipService.FunnyClipService.GetClip(token);
+                Process.Start(psi);
+            }
+            catch
+            {
+                token = await authService.RefreshToken(token);
+                PlayClip(token);
+            }
+            WaitForClip(token);
         }
     }
 }
