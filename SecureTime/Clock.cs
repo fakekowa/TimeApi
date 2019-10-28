@@ -3,24 +3,15 @@ using System.Threading.Tasks;
 using AuthMe;
 namespace SecureTime
 {
-    public class Clock
+    public class FunnyService : IFunnyService
     {
-        string authToken = String.Empty;
         AuthService auth;
 
-        public Clock()
+        public FunnyService()
         {
             auth = new AuthService();
         }
-
-        public async Task<bool> Authenticate(string userName, string password)
-        {
-            this.authToken = await auth.Authenticate(userName, password);
-
-            return !string.IsNullOrEmpty(this.authToken);
-
-        }
-        public TimeSpan GetTime()
+        public TimeSpan GetTime(string authToken)
         {
             if (authToken == "IfYouAreTheFirstOneToGetThisComeToUsForAPresent")
             {

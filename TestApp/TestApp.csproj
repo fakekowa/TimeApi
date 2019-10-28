@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3-beta2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,11 +51,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SecureTime\SecureTime.csproj">
-      <Project>{1a095f8b-2555-417c-8d78-6f7e5c7f933b}</Project>
-      <Name>SecureTime</Name>
+    <ProjectReference Include="..\AuthMe\AuthMe.csproj">
+      <Project>{c0f4053b-332b-460e-985f-274a07008b81}</Project>
+      <Name>AuthMe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FunnyClipService\ClipService.csproj">
+      <Project>{62905386-6039-48d0-8ff4-e24801996914}</Project>
+      <Name>ClipService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace SecureTime
 {
-    interface IClock
+    interface IFunnyService
     {
-        Task<bool> Authenticate(string userName, string password);
-        DateTime GetTime();
+        TimeSpan GetTime(string authToken);
     }
 }
